@@ -1,16 +1,23 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { Paper } from "../components/style"
-import { Form, FormBlock } from "../blocks/form"
-import { Title, TitleBlock } from "../blocks/title"
-import { Image, ImageBlock } from "../blocks/image"
-import { Content, ContentBlock } from "../blocks/content"
+import { Form, formRow } from "../blocks/form"
+import { Title, headingRow } from "../blocks/title"
+import { Image, imageRow } from "../blocks/image"
+import { Content, contentRow } from "../blocks/content"
+import { featureRow, Features } from "../blocks/features"
+import { ButtonRow, buttonRow } from "../blocks/button";
+import { Video, videoRow } from "../blocks/video";
+import { columnsRow, Columns } from "../blocks/columns";
+import { CTA, ctaRow } from "../blocks/cta";
+import { htmlRow } from "../blocks/html";
 import { PageLayout } from "../components/pageLayout"
-
-import { useLocalJsonForm } from "gatsby-tinacms-json"
+import { usePlugin } from "tinacms";
+import { useJsonForm } from "gatsby-tinacms-json"
 
 export default function Page({ data }) {
-  const [page] = useLocalJsonForm(data.page, PageForm)
+  const [page, form] = useJsonForm(data.page, PageForm)
+  usePlugin(form);
   const blocks = page.blocks ? page.blocks : []
 
   return (
@@ -19,13 +26,23 @@ export default function Page({ data }) {
         {blocks &&
           blocks.map(({ _template, ...data }, i) => {
             switch (_template) {
-              case "TitleBlock":
+              case "headingRow":
                 return <Title page={page} data={data} />
-              case "ImageBlock":
+              case "imageRow":
                 return <Image data={data} />
-              case "FormBlock":
+              case "formRow":
                 return <Form form={data} />
-              case "ContentBlock":
+              case "ctaRow":
+                return <CTA data={data} />
+              case "videoRow":
+                return <Video data={data} />
+              case "featureRow":
+                return <Features data={data} />
+              case "buttonRow":
+                return <ButtonRow data={data} />
+              case "columnRow":
+                return <Columns data={data} />
+              case "contentRow":
                 if (data.content && page.childrenPagesJsonBlockMarkdown[i])
                   return (
                     <Content
@@ -50,86 +67,77 @@ const PageForm = {
   label: "Page",
   fields: [
     {
-      label: "Title",
-      name: "rawJson.title",
-      component: "text",
-    },
-    {
-      label: "Hero",
-      name: "rawJson.hero",
-      component: "group",
-      fields: [
-        {
-          label: "Headline",
-          name: "headline",
-          component: "text",
-        },
-        {
-          label: "Textline",
-          name: "textline",
-          component: "text",
-        },
-        {
-          label: "Image",
-          name: "image",
-          component: "image",
-          parse: (filename) => `../images/${filename}`,
-          uploadDir: () => `/content/images/`,
-          previewSrc: (formValues, input) => {
-            if (!formValues.jsonNode.hero || !formValues.jsonNode.hero.image)
-              return ""
-            return formValues.jsonNode.hero.image.childImageSharp.fluid.src
+        label: "Hero",
+        name: "hero",
+        description: "Settings for the hero of the page",
+        component: "group",
+        fields: [
+          {
+            name: "showHero",
+            component: "toggle",
+            label: "Show Hero?",
           },
-        },
-        {
-          label: "Actions",
-          name: "ctas",
-          component: "group-list",
-          itemProps: (item) => ({
-            key: item.link,
-            label: item.label,
-          }),
-          fields: [
-            {
-              label: "Label",
-              name: "label",
-              component: "text",
-            },
-            {
-              label: "Link",
-              name: "link",
-              component: "text",
-            },
-            {
-              label: "Primary",
-              name: "primary",
-              component: "toggle",
-            },
-            {
-              label: "Arrow",
-              name: "arrow",
-              component: "toggle",
-            },
-          ],
-        },
-        {
-          label: "Large",
-          name: "large",
-          component: "toggle",
-        },
-      ],
-    },
-    {
-      label: "Page Sections",
-      name: "rawJson.blocks",
-      component: "blocks",
-      templates: {
-        TitleBlock,
-        ImageBlock,
-        FormBlock,
-        ContentBlock,
+          {
+            name: "heading",
+            label: "Heading",
+            component: "text",
+          },
+          {
+            name: "content",
+            label: "Hero Content",
+            component: "markdown",
+          },
+          {
+            name: "cta",
+            label: "Button Text",
+            component: "text",
+          },
+          {
+            name: "ctaTarget",
+            label: "Button Link",
+            component: "text",
+          },
+          {
+            name: "image",
+            label: "Image",
+            component: "text",
+          },
+          {
+            name: "imageBg",
+            label: "Use image as background?",
+            component: "toggle",
+          },
+          {
+            name: "contentAlign",
+            label: "Content Alignment",
+            component: "select",
+            options: ["Left", "Right", "Center"],
+          },
+          {
+            name: "imageAlign",
+            label: "Image Alignment",
+            component: "select",
+            options: ["Left", "Right", "Top", "Bottom"],
+          },
+        ],
       },
-    },
+      {
+        label: "Page Sections",
+        name: "Sections",
+        component: "blocks",
+        templates: {
+          features: featureRow,
+          heading: headingRow,
+          content: contentRow,
+          button: buttonRow,
+          image: imageRow,
+          video: videoRow,
+          form: formRow,
+          columns: columnsRow,
+          "image-with-text": ctaRow,
+          html: htmlRow,
+        },
+      },
   ],
 }
 

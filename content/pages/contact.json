@@ -3,13 +3,13 @@
   "path": "/contact",
   "blocks": [
     {
-      "_template": "TitleBlock",
+      "_template": "headingRow",
       "title": "",
       "underline": true,
       "content": ""
     },
     {
-      "_template": "FormBlock",
+      "_template": "formRow",
       "name": "Contact Form",
       "fields": [
         {

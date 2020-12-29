@@ -20,11 +20,11 @@
   },
   "blocks": [
     {
-      "_template": "ContentBlock",
+      "_template": "contentRow",
       "content": "## Thanks DJ\n\nThis is awesome"
     },
     {
-      "_template": "ContentBlock",
+      "_template": "contentRow",
       "content": "## block content",
       "name": "dummy",
       "title": "dummy",

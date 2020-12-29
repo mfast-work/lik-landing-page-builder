@@ -1,5 +1,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
+import rowSettings from "./row"
+
 
 export function Title({ page, data }) {
   const centered = data.center ? data.center : false
@@ -37,17 +39,30 @@ const Hr = styled.hr`
     `};
 `
 
-export const TitleBlock = {
-  label: "Title",
-  name: "title",
+export const headingRow = {
+  label: "Heading",
+  key: "heading-row",
   defaultItem: {
-    title: "",
-    center: false,
-    underline: true,
+    settings: "",
+    heading: "",
   },
   fields: [
-    { name: "title", label: "Title", component: "text" },
-    { name: "center", label: "Center", component: "toggle" },
-    { name: "underline", label: "Underline", component: "toggle" },
+    rowSettings,
+    {
+      name: "text",
+      label: "Text",
+      component: "text",
+    },
+    {
+      name: "size",
+      label: "Font Size",
+      description: "Max size: 100",
+      component: "number",
+    },
+    {
+      name: "style",
+      label: "Dark or light?",
+      component: "toggle",
+    },
   ],
 }

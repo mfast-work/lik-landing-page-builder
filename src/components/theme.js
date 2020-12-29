@@ -296,6 +296,14 @@ export const ThemeForm = {
             return value || false
           },
         },
+        {
+          label: "Font",
+          name: "font",
+          component: "text",
+          parse(value) {
+            return value || ""
+          },
+        },
       ],
     },
   ],

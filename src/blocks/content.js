@@ -1,5 +1,6 @@
 import React from "react"
 import styled, { css } from "styled-components"
+import rowSettings from "./row"
 
 export function Content({ data, html }) {
   const centered = data.center ? data.center : false
@@ -21,16 +22,15 @@ const StyledContent = styled.div`
     `};
 `
 
-export const ContentBlock = {
+export const contentRow = {
   label: "Content",
-  name: "content",
-  key: "test",
-  defaultItem: {
-    content: "",
-    center: false,
-  },
+  key: "content-row",
   fields: [
-    { name: "content", label: "Content", component: "markdown" },
-    { name: "center", label: "Center", component: "toggle" },
+    rowSettings,
+    {
+      name: "content",
+      label: "Content",
+      components: "markdown",
+    },
   ],
 }

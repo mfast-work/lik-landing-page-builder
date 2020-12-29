@@ -275,7 +275,7 @@ export const GlobalStyles = createGlobalStyle`
 
   html {
     font-size: 100%;
-    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    font-family: ${(props) => props.theme.typography.font + ','} "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
       "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
       "Helvetica Neue", sans-serif;
     line-height: 1.5;

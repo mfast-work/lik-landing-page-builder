@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import get from "lodash.get"
+import rowSettings from "./row"
 
 export function Image({ data }) {
   return (
@@ -18,26 +18,35 @@ const ImageWrapper = styled.div`
   overflow: hidden;
 `
 
-export const ImageBlock = {
+export const imageRow = {
   label: "Image",
-  name: "image",
-  key: "test",
-  defaultItem: {
-    image: "",
+  key: "image-row",
+  defualtItem: {
+    settings: "",
   },
   fields: [
+    rowSettings,
     {
-      label: "Image",
-      name: "image",
-      component: "image",
-      parse: filename => `../images/${filename}`,
-      uploadDir: () => `/content/images/`,
-      previewSrc: (formValues, fieldProps) => {
-        const pathName = fieldProps.input.name.replace("rawJson", "jsonNode")
-        const imageNode = get(formValues, pathName)
-        if (!imageNode || !imageNode.childImageSharp) return ""
-        return imageNode.childImageSharp.fluid.src
-      },
+      name: "file",
+      label: "Image name",
+      component: "text",
+    },
+    {
+      name: "size",
+      label: "Size (Width)",
+      description: "Max size: 100",
+      component: "number",
+    },
+    {
+      name: "alt",
+      label: "Alt Text",
+      description: "Describe the image for SEO and screenreaders",
+      component: "text",
+    },
+    {
+      name: "shadow",
+      label: "Drop Shadow",
+      component: "toggle",
     },
   ],
 }

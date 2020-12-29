@@ -3,6 +3,7 @@ import { Button } from "../components/style"
 import styled, { css } from "styled-components"
 import { mix } from "polished"
 import slugify from "react-slugify"
+import rowSettings from "./row"
 
 export function Form({ form }) {
   return (
@@ -116,7 +117,7 @@ export const messageInputBlock = {
   ...base,
 }
 
-export const FormBlock = {
+export const formRow = {
   label: "Form",
   key: "name",
   name: "form",
@@ -127,6 +128,7 @@ export const FormBlock = {
     fields: [],
   },
   fields: [
+    rowSettings,
     { name: "name", label: "Name", component: "text" },
     {
       name: "recipient",
