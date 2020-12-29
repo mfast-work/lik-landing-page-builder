@@ -20,7 +20,8 @@ export const Theme = ({ children }) => {
 
   const isBrowser = typeof window !== "undefined"
   const userPrefDark = isBrowser ? localStorage.getItem("isDarkMode") : false
-  const initialDarkMode = userPrefDark === "true" ? true : globalTheme.defaultDarkMode
+  const initialDarkMode =
+    userPrefDark === "true" ? true : globalTheme.defaultDarkMode
 
   const [darkMode, setDarkMode] = useState(initialDarkMode)
 
@@ -95,9 +96,9 @@ export const Theme = ({ children }) => {
 
 const TinaOverrideGlobalStyle = createGlobalStyle`
   :root {
-    --tina-color-primary-light: ${props => props.primary};
-    --tina-color-primary: ${props => props.primary};
-    --tina-color-primary-dark: ${props => props.primary};
+    --tina-color-primary-light: ${(props) => props.primary};
+    --tina-color-primary: ${(props) => props.primary};
+    --tina-color-primary-dark: ${(props) => props.primary};
   }
 `
 
@@ -308,10 +309,10 @@ export const ThemeForm = {
       ],
     },
     {
-      name: 'rawJson.defaultDarkMode',
-      component: 'toggle',
-      label: 'Default Dark Mode',
-      description: 'Check to make dark mode the default.',
+      name: "rawJson.defaultDarkMode",
+      component: "toggle",
+      label: "Default Dark Mode",
+      description: "Check to make dark mode the default.",
     },
   ],
 }

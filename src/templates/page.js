@@ -6,18 +6,18 @@ import { Title, headingRow } from "../blocks/title"
 import { Image, imageRow } from "../blocks/image"
 import { Content, contentRow } from "../blocks/content"
 import { featureRow, Features } from "../blocks/features"
-import { ButtonRow, buttonRow } from "../blocks/button";
-import { Video, videoRow } from "../blocks/video";
-import { columnsRow, Columns } from "../blocks/columns";
-import { CTA, ctaRow } from "../blocks/cta";
-import { htmlRow } from "../blocks/html";
+import { ButtonRow, buttonRow } from "../blocks/button"
+import { Video, videoRow } from "../blocks/video"
+import { columnsRow, Columns } from "../blocks/columns"
+import { CTA, ctaRow } from "../blocks/cta"
+import { htmlRow } from "../blocks/html"
 import { PageLayout } from "../components/pageLayout"
-import { usePlugin } from "tinacms";
+import { usePlugin } from "tinacms"
 import { useJsonForm } from "gatsby-tinacms-json"
 
 export default function Page({ data }) {
   const [page, form] = useJsonForm(data.page, PageForm)
-  usePlugin(form);
+  usePlugin(form)
   const blocks = page.blocks ? page.blocks : []
 
   return (
@@ -67,77 +67,77 @@ const PageForm = {
   label: "Page",
   fields: [
     {
-        label: "Hero",
-        name: "hero",
-        description: "Settings for the hero of the page",
-        component: "group",
-        fields: [
-          {
-            name: "showHero",
-            component: "toggle",
-            label: "Show Hero?",
-          },
-          {
-            name: "heading",
-            label: "Heading",
-            component: "text",
-          },
-          {
-            name: "content",
-            label: "Hero Content",
-            component: "markdown",
-          },
-          {
-            name: "cta",
-            label: "Button Text",
-            component: "text",
-          },
-          {
-            name: "ctaTarget",
-            label: "Button Link",
-            component: "text",
-          },
-          {
-            name: "image",
-            label: "Image",
-            component: "text",
-          },
-          {
-            name: "imageBg",
-            label: "Use image as background?",
-            component: "toggle",
-          },
-          {
-            name: "contentAlign",
-            label: "Content Alignment",
-            component: "select",
-            options: ["Left", "Right", "Center"],
-          },
-          {
-            name: "imageAlign",
-            label: "Image Alignment",
-            component: "select",
-            options: ["Left", "Right", "Top", "Bottom"],
-          },
-        ],
-      },
-      {
-        label: "Page Sections",
-        name: "Sections",
-        component: "blocks",
-        templates: {
-          features: featureRow,
-          heading: headingRow,
-          content: contentRow,
-          button: buttonRow,
-          image: imageRow,
-          video: videoRow,
-          form: formRow,
-          columns: columnsRow,
-          "image-with-text": ctaRow,
-          html: htmlRow,
+      label: "Hero",
+      name: "hero",
+      description: "Settings for the hero of the page",
+      component: "group",
+      fields: [
+        {
+          name: "showHero",
+          component: "toggle",
+          label: "Show Hero?",
         },
+        {
+          name: "heading",
+          label: "Heading",
+          component: "text",
+        },
+        {
+          name: "content",
+          label: "Hero Content",
+          component: "markdown",
+        },
+        {
+          name: "cta",
+          label: "Button Text",
+          component: "text",
+        },
+        {
+          name: "ctaTarget",
+          label: "Button Link",
+          component: "text",
+        },
+        {
+          name: "image",
+          label: "Image",
+          component: "text",
+        },
+        {
+          name: "imageBg",
+          label: "Use image as background?",
+          component: "toggle",
+        },
+        {
+          name: "contentAlign",
+          label: "Content Alignment",
+          component: "select",
+          options: ["Left", "Right", "Center"],
+        },
+        {
+          name: "imageAlign",
+          label: "Image Alignment",
+          component: "select",
+          options: ["Left", "Right", "Top", "Bottom"],
+        },
+      ],
+    },
+    {
+      label: "Page Sections",
+      name: "Sections",
+      component: "blocks",
+      templates: {
+        features: featureRow,
+        heading: headingRow,
+        content: contentRow,
+        button: buttonRow,
+        image: imageRow,
+        video: videoRow,
+        form: formRow,
+        columns: columnsRow,
+        "image-with-text": ctaRow,
+        html: htmlRow,
       },
+    },
   ],
 }
 

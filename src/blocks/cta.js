@@ -2,9 +2,7 @@ import React from "react"
 import rowSettings from "./row"
 
 export function CTA({ page, data }) {
-    return (
-        <div></div>
-    )
+  return <div></div>
 }
 export const ctaRow = {
   label: "Image and Text",
